@@ -1,7 +1,35 @@
 {
   "name": "@heylock-dev/ui",
-  "version": "0.2.13",
+  "version": "0.3.0",
   "description": "Heylock UI React component library",
+  "keywords": [
+    "ai-agent",
+    "chatbot",
+    "chat-ui",
+    "chat-widget",
+    "react",
+    "react-components",
+    "react-ui",
+    "typescript",
+    "javascript",
+    "message-streaming",
+    "streaming-chat",
+    "hooks",
+    "useAgent",
+    "provider",
+    "tailwind",
+    "tailwindcss",
+    "framer-motion",
+    "accessibility",
+    "a11y",
+    "heylock",
+    "ui-library",
+    "component-library",
+    "chatbot-ui",
+    "expanding-chat",
+    "floating-chat",
+    "ai-ui-library"
+  ],
   "main": "dist/index.js",
   "types": "dist/types.d.ts",
   "type": "module",
@@ -9,26 +37,25 @@
     "dist"
   ],
   "scripts": {
-    "build": "node scripts/build.mjs",
-    "build:prod": "node scripts/build.mjs --prod",
-    "test": "node scripts/smoke-test.mjs"
+    "test": "node scripts/smoke-test.mjs",
+    "build": "npm run test && node scripts/build.mjs --prod"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Heylock-AI/Heylock-ui.git"
+    "url": "git+https://github.com/Heylock-AI/heylock-ui.git"
   },
   "author": "Heylock team",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/Heylock-AI/Heylock-ui/issues"
+    "url": "https://github.com/Heylock-AI/heylock-ui/issues"
   },
-  "homepage": "https://github.com/Heylock-AI/Heylock-ui#readme",
+  "homepage": "https://github.com/Heylock-AI/heylock-ui#readme",
   "dependencies": {
-    "framer-motion": "^12.23.12",
     "heylock": "^0.2.0",
     "tailwind-merge": "^3.3.1"
   },
   "peerDependencies": {
+    "framer-motion": "^12.23.12",
     "react": ">=18.0.0",
     "react-dom": ">=18.0.0",
     "tailwindcss": ">=3.0.0"

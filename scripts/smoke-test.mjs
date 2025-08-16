@@ -5,7 +5,7 @@ import path from 'path';
 import url from 'url';
 import assert from 'assert';
 import { build } from 'esbuild';
-import { mkdtemp, rm, writeFile, readFile } from 'fs/promises';
+import { mkdtemp, rm } from 'fs/promises';
 import os from 'os';
 
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
