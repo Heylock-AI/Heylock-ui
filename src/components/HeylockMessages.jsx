@@ -3,15 +3,15 @@
 import { twMerge } from "tailwind-merge";
 import { useAgent } from "./HeylockProvider";
 import { motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import * as React from "react";
 
 export default function HeylockMessages({ className, userMessageClassName, assistantMessageClassName }) {
     const agent = useAgent();
-    const [messages, setMessages] = useState([]);
-    const containerRef = useRef(null);
+    const [messages, setMessages] = React.useState([]);
+    const containerRef = React.useRef(null);
 
     //#region Validate properties
-    useEffect(() => {
+    React.useEffect(() => {
         if (className !== undefined && typeof className !== "string") {
             throw new Error("HeylockMessages: 'className' must be a string if provided.");
         }
@@ -26,7 +26,7 @@ export default function HeylockMessages({ className, userMessageClassName, assis
     }, [className, userMessageClassName, assistantMessageClassName]);
     //#endregion
 
-    useEffect(() => {
+    React.useEffect(() => {
         if(agent.isInitialized === true){
             setMessages(() => [...agent.messageHistory]);
         }

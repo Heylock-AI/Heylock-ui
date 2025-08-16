@@ -1,15 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import * as React from "react";
 import HeylockInput from "./HeylockInput";
 import { twMerge } from "tailwind-merge";
 import { AnimatePresence, motion } from "framer-motion";
 import HeylockMessages from "./HeylockMessages";
 
 export default function HeylockExpandingChat({ className = "w-[calc(100vw-0.75rem)] sm:w-[24rem] fixed bottom-4 px-3 sm:right-4", messageContainerClassName = "h-96 max-h-[calc(100vh-8rem)]", headerClassName, disabled = false, closeButtonClassName, theme = 'auto', header = 'Chat with agent'}) {
-    const [showMessages, setShowMessages] = useState(false); 
+    const [showMessages, setShowMessages] = React.useState(false); 
 
-    useEffect(() => {
+    React.useEffect(() => {
         // Validate 'className'
         if (className && typeof className !== 'string') {
             console.error("HeylockExpandingChat: 'className' prop must be a string.");

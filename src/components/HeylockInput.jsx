@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useCallback, useEffect, useRef, useState } from "react";
+import * as React from "react";
 import { twMerge } from "tailwind-merge";
 import { useAgent } from "./HeylockProvider";
 
@@ -9,18 +9,18 @@ const SUBMIT_THROTTLE_MS = 1000;
 const MAX_INPUT_LENGTH = 20000;
 
 export default function HeylockInput({ disabled = false, disabledText = "Unavaliable. Please try again later.", respondingText = "Responding...", theme = 'auto', placeholders=['Hi there', 'Hi here'], placeholderInterval = 5000, className, inputClassName, placeholderClassName, buttonClassName, arrowClassName, onChange, onSubmit, onFocus, }){
-    const [isAnimating, setIsAnimating] = useState(false);
-    const [isDisabled, setIsDisabled] = useState(disabled);
-    const [isResponding, setIsResponding] = useState(false);
-    const [inputValue, setInputValue] = useState("");
-    const [lastSubmitTime, setLastSubmitTime] = useState(0);
-    const [currentPlaceholderIndex, setCurrentPlaceholderIndex] = useState(0);
-    const canvasRef = useRef(null);
-    const inputRef = useRef(null);
-    const placeholderIntervalRef = useRef(null);
+    const [isAnimating, setIsAnimating] = React.useState(false);
+    const [isDisabled, setIsDisabled] = React.useState(disabled);
+    const [isResponding, setIsResponding] = React.useState(false);
+    const [inputValue, setInputValue] = React.useState("");
+    const [lastSubmitTime, setLastSubmitTime] = React.useState(0);
+    const [currentPlaceholderIndex, setCurrentPlaceholderIndex] = React.useState(0);
+    const canvasRef = React.useRef(null);
+    const inputRef = React.useRef(null);
+    const placeholderIntervalRef = React.useRef(null);
     const agent = useAgent();
 
-    useEffect(() => {
+    React.useEffect(() => {
         if(agent.isInitialized){
             setIsDisabled(agent.usageRemaining.messages <= 0);
         } else {
@@ -40,14 +40,14 @@ export default function HeylockInput({ disabled = false, disabledText = "Unavali
         }
     }, []);
 
-    useEffect(() => {
+    React.useEffect(() => {
         if(disabled === false) return;
 
         setIsDisabled(disabled);
     }, [disabled]);
 
     //#region Placeholder animation
-    useEffect(() => {
+    React.useEffect(() => {
         placeholderIntervalRef.current = setInterval(() => {
             setCurrentPlaceholderIndex((prev) => (prev +1) % placeholders.length)
         }, placeholderInterval);
@@ -59,7 +59,7 @@ export default function HeylockInput({ disabled = false, disabledText = "Unavali
     //#endregion
 
     //#region Particles animation
-    const animationDataRef = useRef([]);
+    const animationDataRef = React.useRef([]);
 
     const animate = (start) => {
         const animateFrame = (pos = 0) => {
@@ -116,7 +116,7 @@ export default function HeylockInput({ disabled = false, disabledText = "Unavali
       animateFrame(start);
     };
 
-    const draw = useCallback(() => {
+    const draw = React.useCallback(() => {
         if (!inputRef.current) return;
 
         const canvas = canvasRef.current;

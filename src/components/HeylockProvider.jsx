@@ -1,9 +1,9 @@
 "use client";
 
-import { createContext, useContext, useRef } from "react"
+import * as React from "react";
 import Heylock from "heylock";
 
-const Context = createContext();
+const Context = React.createContext();
 
 export default function HeylockProvider({ children, agentKey }){
     //#region Validate properties
@@ -16,7 +16,7 @@ export default function HeylockProvider({ children, agentKey }){
     let agentRef = null;
 
     try{
-        agentRef = useRef(new Heylock(agentKey, { suppressWarnings: true }));
+        agentRef = React.useRef(new Heylock(agentKey, { suppressWarnings: true }));
     } catch(error){ 
         console.error("Failed to initialize Heylock agent:", error);
         throw new Error("HeylockProvider failed to initialize the agent.");
@@ -30,7 +30,7 @@ export default function HeylockProvider({ children, agentKey }){
 
 //#region Hooks
 export function useAgent(){
-    const agent = useContext(Context);
+    const agent = React.useContext(Context);
 
     if(typeof agent === 'undefined'){
         throw new Error("useAgent must be used within a HeylockProvider");

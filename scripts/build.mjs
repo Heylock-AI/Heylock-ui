@@ -6,7 +6,7 @@
 // - Marks peer deps as externals
 
 import { build } from 'esbuild';
-import { mkdir, rm, cp, writeFile, readFile } from 'fs/promises';
+import { mkdir, rm, writeFile, readFile } from 'fs/promises';
 import path from 'path';
 import url from 'url';
 
@@ -23,7 +23,7 @@ const isProd = process.argv.includes('--prod');
 
 async function bundle(){
   await build({
-    entryPoints: [path.join(root, 'src/components/index.js')],
+    entryPoints: [path.join(root, 'src/index.js')],
     outfile: path.join(outdir, 'index.js'),
     format: 'esm',
     platform: 'browser',
@@ -45,6 +45,12 @@ async function bundle(){
     treeShaking: true,
     legalComments: 'none'
   });
+  // Prepend 'use client' to the output file
+  const outFile = path.join(outdir, 'index.js');
+  const orig = await readFile(outFile, 'utf8');
+  if (!orig.startsWith('"use client"') && !orig.startsWith("'use client'")) {
+    await writeFile(outFile, '"use client"\n' + orig, 'utf8');
+  }
 }
 
 async function copyTypes(){
@@ -74,7 +80,7 @@ async function writePackageJsonStub(){
   try {
     console.log('[build] cleaning');
     await clean();
-  console.log(`[build] bundling (prod=${isProd})`);
+    console.log(`[build] bundling (prod=${isProd})`);
     await bundle();
     console.log('[build] copying types');
     await copyTypes();
